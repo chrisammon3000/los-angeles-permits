@@ -1,57 +1,41 @@
-los-angeles-permits
-==============================
+# Los Angeles Construction Permits Exploratory Data Analysis
+This project looks at a dataset provided by the City of Los Angeles containing data on building permits. Data can be accessed here: [Building and Safety Permit Information](https://data.lacity.org/A-Prosperous-City/Building-and-Safety-Permit-Information/yv23-pmwf).
 
-An EDA of building permits in Los Angeles.
+#### -- Project Status: [Active]
 
-Project Organization
-------------
+## Project Intro
+The purpose of this project is find useful metrics for evaluating the construction industry, housing market and local economy. With the data it is possible to get a high level overview of construction activity and development in the city. It becomes possible to find answers to questions such as which areas have the most development occurring, predict where new development may occur, and analyze changes in the types of permits being issued.
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
+### Methods Used
+* Inferential Statistics
+* Data Visualization
+* Geographic Information Systems (GIS)
 
+### Technologies
+* Python
+* Pandas, matplotlib, seaborn, jupyter
+* geopandas, geopy
+* Google Maps API
 
---------
+## Project Description
+The project in its current version contains import, cleaning and EDA of features in the Los Angeles Building Permits dataset
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+## Needs of this project
+- data exploration/descriptive statistics
+- data processing/cleaning
+- statistical modeling
+- writeup/reporting
+- create modules for geocoding
+
+## Getting Started
+
+1. Clone this repo (for help see this [tutorial](https://help.github.com/articles/cloning-a-repository/)).
+2. Raw Data can be accessed here: [Building and Safety Permit Information](https://data.lacity.org/A-Prosperous-City/Building-and-Safety-Permit-Information/yv23-pmwf).
+3. Data processing/transformation scripts are in development and will be included in the [src](https://github.com/gclindsey/los-angeles-permits/tree/master/src) directory.
+
+## Featured Notebooks/Analysis/Deliverables
+* [Building Permits in Los Angeles - Initial EDA](https://github.com/gclindsey/los-angeles-permits/blob/master/notebooks/190928-gcl-initial-EDA.ipynb)
+
+## Contributing Members
+
+**Team Leads (Contacts) : [Gregory Lindsey](https://github.com/gclindsey)**
