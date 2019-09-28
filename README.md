@@ -1,4 +1,4 @@
-# Los Angeles Construction Permits Exploratory Data Analysis
+# Building Permits in Los Angeles
 This project looks at a dataset provided by the City of Los Angeles containing data on building permits. Data can be accessed here: [Building and Safety Permit Information](https://data.lacity.org/A-Prosperous-City/Building-and-Safety-Permit-Information/yv23-pmwf).
 
 #### -- Project Status: [Active]
@@ -21,11 +21,9 @@ The purpose of this project is find useful metrics for evaluating the constructi
 The project in its current version contains import, cleaning and EDA of features in the Los Angeles Building Permits dataset
 
 ## Needs of this project
-- data exploration/descriptive statistics
-- data processing/cleaning
 - statistical modeling
-- writeup/reporting
-- create modules for geocoding
+- develop geocoding modules
+- writeup & reporting
 
 ## Getting Started
 
