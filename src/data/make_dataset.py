@@ -28,3 +28,25 @@ if __name__ == '__main__':
     load_dotenv(find_dotenv())
 
     main()
+
+import numpy as np
+import pandas as pd
+import re
+import matplotlib.pyplot as plt
+import seaborn as sns
+plt.style.use('ggplot')
+
+import os
+print(os.listdir('..'))
+import sys
+
+from urllib.request import urlretrieve
+
+filename = 'Building_and_Safety_Permit_Information.csv'
+url = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
+
+# Check if dataset is presemt
+if filename not in os.listdir('../data/raw/'):
+    url = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
+    #urlretrieve(url, filename)
+    print(os.listdir('../data/raw/'))
