@@ -17,38 +17,46 @@ def get_data(url, filename):
         # Download CSV to dataframe
         df = pd.read_csv(URL, parse_dates=["Issue Date", "Status Date"])
 
-    else :
     # Read from local file
     df = pd.read_csv(URL, parse_dates=["Issue Date", "Status Date"])
 
+    # Give index name
+    df.index.names = ['Index']
+
     return df
 
+replace_dict = [' ':'_', '-':'_', '\#':'No', '/':'_', '.':'', '(':'', ')':'']
 
-df.index.names = ['Index']
+def clean_data(df, replace_with=None):
 
-# Replace whitespace with underscore
-df.columns = df.columns.str.replace(' ', '_')
 
-# Replace hyphen with underscore
-df.columns = df.columns.str.replace('-', '_')
 
-# Replace hashtag with No (short for number)
-df.columns = df.columns.str.replace('#', 'No')
 
-# Replace forward slash with underscore
-df.columns = df.columns.str.replace('/', '_')
 
-# Remove period
-df.columns = df.columns.str.replace('.', '')
 
-# Remove open parenthesis
-df.columns = df.columns.str.replace('(', '')
+    # Replace whitespace with underscore
+    df.columns = df.columns.str.replace(' ', '_')
 
-# Remove closed parenthesis
-df.columns = df.columns.str.replace(')', '')
+    # Replace hyphen with underscore
+    df.columns = df.columns.str.replace('-', '_')
 
-# Remove apostrophe
-df.columns = df.columns.str.replace("'", '')
+    # Replace hashtag with No (short for number)
+    df.columns = df.columns.str.replace('#', 'No')
+
+    # Replace forward slash with underscore
+    df.columns = df.columns.str.replace('/', '_')
+
+    # Remove period
+    df.columns = df.columns.str.replace('.', '')
+
+    # Remove open parenthesis
+    df.columns = df.columns.str.replace('(', '')
+
+    # Remove closed parenthesis
+    df.columns = df.columns.str.replace(')', '')
+
+    # Remove apostrophe
+    df.columns = df.columns.str.replace("'", '')
 
 permits = df[['Issue_Date', 'Status_Date','Status',
  'Permit_Type',
