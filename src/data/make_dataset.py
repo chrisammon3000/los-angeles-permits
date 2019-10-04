@@ -8,15 +8,13 @@ from urllib.request import urlretrieve
 filename = 'Building_and_Safety_Permit_Information.csv'
 url = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
 
-# Check if dataset is presemt
-if filename not in os.listdir('./data/raw/'):
-    print("downloading...")
-    url = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
-    #urlretrieve(url, filename)
-    print(os.listdir('./data/raw/'))
+def get_data(url, filename):
+    # Check if dataset is presemt
+    if filename not in os.listdir('./data/raw/'):
+        print("downloading...")
 
-# Import CSV
-df = pd.read_csv('./data/raw/'+filename, parse_dates=["Issue Date",
+        # Import CSV
+        df = pd.read_csv('./data/raw/'+filename, parse_dates=["Issue Date",
                                                       "Status Date"])
 df.index.names = ['Index']
 
