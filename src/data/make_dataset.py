@@ -6,16 +6,24 @@ import os
 from urllib.request import urlretrieve
 
 filename = 'Building_and_Safety_Permit_Information.csv'
-url = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
+URL = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
+LOCAL_PATH = './data/raw/'
 
 def get_data(url, filename):
-    # Check if dataset is presemt
-    if filename not in os.listdir('./data/raw/'):
-        print("downloading...")
 
-        # Import CSV
-        df = pd.read_csv('./data/raw/'+filename, parse_dates=["Issue Date",
-                                                      "Status Date"])
+    # Check if dataset is presemt
+    if filename not in os.listdir(LOCAL_PATH):
+
+        # Download CSV to dataframe
+        df = pd.read_csv(URL, parse_dates=["Issue Date", "Status Date"])
+
+    else :
+    # Read from local file
+    df = pd.read_csv(URL, parse_dates=["Issue Date", "Status Date"])
+
+    return df
+
+
 df.index.names = ['Index']
 
 # Replace whitespace with underscore
