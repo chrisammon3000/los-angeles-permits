@@ -10,16 +10,12 @@ URL = 'https://data.lacity.org/api/views/yv23-pmwf/rows.csv'
 LOCAL_PATH = './data/raw/'
 
 def get_data(url, filename):
-
     # Check if dataset is presemt
     if filename not in os.listdir(LOCAL_PATH):
-
         # Download CSV to dataframe
         df = pd.read_csv(URL, parse_dates=["Issue Date", "Status Date"])
-
     # Read from local file
     df = pd.read_csv(URL, parse_dates=["Issue Date", "Status Date"])
-
     # Give index name
     df.index.names = ['Index']
 
@@ -27,74 +23,55 @@ def get_data(url, filename):
 
 replace_dict = [' ':'_', '-':'_', '\#':'No', '/':'_', '.':'', '(':'', ')':'']
 
-def clean_data(df, replace_with=None):
+def format_labels(df, replace_with=None):
+    for key, value in replace_with.iteritems():
+        df.columns = df.columns.str.replace(key, value)
 
+    return df
 
+permits_list = ['Issue_Date', 'Status_Date','Status',
+                            'Permit_Type',
+                             'Permit_Sub_Type',
+                             'Permit_Category','Initiating_Office',
+                             'Address_Start',
+                             'Address_Fraction_Start',
+                             'Address_End',
+                             'Address_Fraction_End',
+                             'Street_Direction',
+                             'Street_Name',
+                             'Street_Suffix',
+                             'Suffix_Direction',
+                             'Unit_Range_Start',
+                             'Unit_Range_End',
+                             'Zip_Code',
+                             'Work_Description',
+                             'Valuation', 'No_of_Residential_Dwelling_Units',
+                             'No_of_Stories',
+                             "Contractors_Business_Name",
+                             'Contractor_City',
+                             'Contractor_State',
+                             'License_Type',
+                             'License_No','Zone',
+                             'Occupancy','Council_District',
+                             'Latitude_Longitude']
 
-
-
-
-    # Replace whitespace with underscore
-    df.columns = df.columns.str.replace(' ', '_')
-
-    # Replace hyphen with underscore
-    df.columns = df.columns.str.replace('-', '_')
-
-    # Replace hashtag with No (short for number)
-    df.columns = df.columns.str.replace('#', 'No')
-
-    # Replace forward slash with underscore
-    df.columns = df.columns.str.replace('/', '_')
-
-    # Remove period
-    df.columns = df.columns.str.replace('.', '')
-
-    # Remove open parenthesis
-    df.columns = df.columns.str.replace('(', '')
-
-    # Remove closed parenthesis
-    df.columns = df.columns.str.replace(')', '')
-
-    # Remove apostrophe
-    df.columns = df.columns.str.replace("'", '')
-
-permits = df[['Issue_Date', 'Status_Date','Status',
- 'Permit_Type',
- 'Permit_Sub_Type',
- 'Permit_Category','Initiating_Office',
- 'Address_Start',
- 'Address_Fraction_Start',
- 'Address_End',
- 'Address_Fraction_End',
- 'Street_Direction',
- 'Street_Name',
- 'Street_Suffix',
- 'Suffix_Direction',
- 'Unit_Range_Start',
- 'Unit_Range_End',
- 'Zip_Code',
- 'Work_Description',
- 'Valuation', 'No_of_Residential_Dwelling_Units',
- 'No_of_Stories',
- "Contractors_Business_Name",
- 'Contractor_City',
- 'Contractor_State',
- 'License_Type',
- 'License_No','Zone',
- 'Occupancy','Council_District',
- 'Latitude_Longitude']]
-
-# Only specific permit types included in analysis
-permits = permits[(permits.Status == "Issued") |
+permits_mask = (permits.Status == "Issued") |
                   (permits.Status == "Permit Finaled") |
-                  (permits.Status == "Re-Activate Permit")]
+                  (permits.Status == "Re-Activate Permit")
+
+
+def subset_data(df):
+    permits = df[permits_list]
+    # Only specific permit types included in analysis
+    permits = permits[permits_mask]
+    # Exclude family dwellings from analysis
+    permits = permits[(permits.Permit_Sub_Type != "1 or 2 Family Dwelling")]
 
 # Create new columns Year and Month
 permits["Year"] = pd.DatetimeIndex(permits["Issue_Date"]).year
 permits["Month"] = pd.DatetimeIndex(permits["Issue_Date"]).month
 
-# Exclude family dwellings from analysis
-permits = permits[(permits.Permit_Sub_Type != "1 or 2 Family Dwelling")]
+
 
 # Convert datatype of addresses to int
 permits[["Address_Start", "Address_End"]] = permits[["Address_Start",
